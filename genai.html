@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Formula 1 Tracks</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+      color: #f1f1f1;
+      text-align: center;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111;
+      padding: 10px 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .sitetitle {
+      font-size: 20px;
+      font-weight: 700;
+      color: #e10600; /* Ferrari red */
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #f1f1f1;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: #e10600;
+    }
+
+    /* Prompt Box */
+    .prompt-box {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px 30px;
+      background: linear-gradient(135deg, #e10600, #ff4d4d);
+      color: #fff;
+      border-radius: 15px;
+      font-size: 18px;
+      font-weight: 500;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    /* Track Container */
+    .track-container {
+      max-width: 700px;
+      margin: 20px auto;
+      background: #222;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    .track-container img.track-img {
+      width: 100%;
+      max-height: 400px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      object-fit: contain;
+    }
+
+    .track-info h2 {
+      color: #e10600;
+      margin-bottom: 10px;
+    }
+
+    .track-info p {
+      margin: 6px 0;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    /* Toggle button */
+    .toggle-btn {
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .toggle-btn img {
+      width: 60px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .toggle-btn img:hover {
+      transform: rotate(20deg) scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">
+      <a href="index.html" class="homelink">
+        <img src="starlogo.png" alt="logo">
+        <span class="sitetitle">Isha Virk</span>
+      </a>
+    </div>
+    <div>
+      <a onclick="toggleStyleSheet()">Style Swap</a>
+      <a href="genai.html">AI</a>
+      <a href="service.html">Service</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="qualifications.html">Qualifications</a>
+    </div>
+  </nav>
+
+  <!-- Prompt Box -->
+  <div class="prompt-box">
+    Prompt: Generate a webpage that gives information about 4 different Formula 1 tracks, Monza, Silverstone, Suzuka, and COTA. This information should be displayed as follows: there should be a track on the page that changes when the user clicks on a toggle image, and when it changes, it matches each of the tracks described above. The track information should be displayed in a box, and should include the name, a short description, and a fun fact about the track. The webpage should make use of visually appealing colors that relate to F1. Use HTML, CSS, and JavaScript in one file. Put this prompt somewhere on the page.
+  </div>
+
+  <!-- Track Content -->
+  <div class="track-container">
+    <img id="trackImage" class="track-img" src="https://media.formula1.com/image/upload/c_fit,h_704/q_auto/v1740000000/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Italy_Circuit.webp" alt="Track">
+    <div class="track-info" id="trackInfo">
+      <h2>Monza (Italy)</h2>
+      <p><strong>Description:</strong> Known as the "Temple of Speed," Monza is one of the fastest tracks in Formula 1.</p>
+      <p><strong>Fun Fact:</strong> Monza has hosted the Italian Grand Prix almost every year since 1950.</p>
+    </div>
+    <div class="toggle-btn">
+      <img src="https://images.emojiterra.com/google/android-12l/512px/1f3ce.png" alt="Toggle Track" onclick="nextTrack()">
+    </div>
+  </div>
+
+  <script>
+    const tracks = [
+      {
+        name: "Monza (Italy)",
+        description: "Known as the 'Temple of Speed,' Monza is one of the fastest tracks in Formula 1.",
+        fact: "Monza has hosted the Italian Grand Prix almost every year since 1950.",
+        image: "https://media.formula1.com/image/upload/c_fit,h_704/q_auto/v1740000000/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Italy_Circuit.webp"
+      },
+      {
+        name: "Silverstone (UK)",
+        description: "The birthplace of Formula 1, hosting the first ever World Championship race in 1950.",
+        fact: "Silverstone is famous for its high-speed corners like Maggotts and Becketts.",
+        image: "https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Great_Britain_Circuit.webp"
+      },
+      {
+        name: "Circuit of the Americas (USA)",
+        description: "COTA is a modern track in Austin, Texas, known for its mix of fast straights and technical corners.",
+        fact: "The track features a steep uphill run into Turn 1, one of the most iconic corners in F1.",
+        image: "https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/USA_Circuit.webp"
+      },
+      {
+        name: "Suzuka (Japan)",
+        description: "Suzuka is unique for its figure-eight layout and is a driver favorite.",
+        fact: "It often plays a decisive role in the championship due to its late-season calendar spot.",
+        image: "https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Japan_Circuit.webp"
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function nextTrack() {
+      currentIndex = (currentIndex + 1) % tracks.length;
+      const track = tracks[currentIndex];
+      document.getElementById("trackImage").src = track.image;
+      document.getElementById("trackInfo").innerHTML = `
+        <h2>${track.name}</h2>
+        <p><strong>Description:</strong> ${track.description}</p>
+        <p><strong>Fun Fact:</strong> ${track.fact}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
